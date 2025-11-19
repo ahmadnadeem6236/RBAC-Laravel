@@ -15,31 +15,43 @@ class RoleUserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create roles
-        $projectRole = Role::create(['name' => 'project_access']);
-        $managerRole = Role::create(['name' => 'manager']);
-        $adminRole = Role::create(['name' => 'admin']);
+        // Create roles (only if they don't exist)
+        $projectRole = Role::firstOrCreate(['name' => 'project_access']);
+        $managerRole = Role::firstOrCreate(['name' => 'manager']);
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
         
-        // Create users
-        $user1 = User::create([
-            'name' => 'User One',
-            'email' => 'user1@example.com',
-            'password' => Hash::make('password')
-        ]);
-        $user1->roles()->attach($projectRole);
+        // Create users (only if they don't exist)
+        $user1 = User::firstOrCreate(
+            ['email' => 'user1@example.com'],
+            [
+                'name' => 'User One',
+                'password' => Hash::make('password')
+            ]
+        );
+        if (!$user1->roles->contains($projectRole->id)) {
+            $user1->roles()->attach($projectRole);
+        }
         
-        $user2 = User::create([
-            'name' => 'User Two',
-            'email' => 'user2@example.com',
-            'password' => Hash::make('password')
-        ]);
-        $user2->roles()->attach($managerRole);
+        $user2 = User::firstOrCreate(
+            ['email' => 'user2@example.com'],
+            [
+                'name' => 'User Two',
+                'password' => Hash::make('password')
+            ]
+        );
+        if (!$user2->roles->contains($managerRole->id)) {
+            $user2->roles()->attach($managerRole);
+        }
         
-        $user3 = User::create([
-            'name' => 'User Three',
-            'email' => 'user3@example.com',
-            'password' => Hash::make('password')
-        ]);
-        $user3->roles()->attach($adminRole);
+        $user3 = User::firstOrCreate(
+            ['email' => 'user3@example.com'],
+            [
+                'name' => 'User Three',
+                'password' => Hash::make('password')
+            ]
+        );
+        if (!$user3->roles->contains($adminRole->id)) {
+            $user3->roles()->attach($adminRole);
+        }
     }
 }
