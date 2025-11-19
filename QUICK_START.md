@@ -6,6 +6,20 @@ The development server is running at: **http://localhost:8000**
 
 Visit the root URL and you'll be automatically redirected to login!
 
+## 🗄️ Database Setup
+
+This application uses **different databases for different environments**:
+
+- **Local Development**: SQLite (already configured, no setup needed!)
+  - File: `database/database.sqlite`
+  - Zero configuration required ✅
+  
+- **Production (Render)**: PostgreSQL
+  - Automatically configured via `render.yaml`
+  - Managed database with better performance
+
+**You don't need to configure anything** - it just works! 🎉
+
 ## 📋 Test the System
 
 ### Step 1: Login with Test Users

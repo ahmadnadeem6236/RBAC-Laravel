@@ -14,6 +14,10 @@ return [
     | the connection which will be utilized unless another connection
     | is explicitly specified when you execute a query / statement.
     |
+    | IMPORTANT: This app uses SQLITE for local development and POSTGRESQL for production.
+    | - Local: Defaults to 'sqlite' (no .env needed, uses database/database.sqlite)
+    | - Production: Set DB_CONNECTION=pgsql in environment variables (configured in render.yaml)
+    |
     */
 
     'default' => env('DB_CONNECTION', 'sqlite'),

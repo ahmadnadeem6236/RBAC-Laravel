@@ -12,11 +12,31 @@ A complete Laravel application implementing Role-Based Access Control with condi
 -   **Secure**: CSRF protection, password hashing, and session regeneration
 -   **Form Validation**: Real-time error display with input persistence
 
+## Database Configuration
+
+This application is configured to use different databases for different environments:
+
+### 🗄️ Local Development → SQLite
+- **Default database**: SQLite (file-based, zero configuration)
+- **Location**: `database/database.sqlite`
+- **No setup required**: Works out of the box!
+- **Perfect for**: Local development and testing
+
+### 🐘 Production → PostgreSQL
+- **Database**: PostgreSQL (via Render's managed database)
+- **Configuration**: Automatically set via `render.yaml`
+- **Environment variable**: `DB_CONNECTION=pgsql`
+- **Perfect for**: Production deployments with better performance and features
+
+**How it works**: The `config/database.php` defaults to SQLite when no `DB_CONNECTION` environment variable is set. In production (Render), the `render.yaml` file automatically configures PostgreSQL.
+
+📖 **For detailed database documentation, see [DATABASE.md](DATABASE.md)**
+
 ## Installation
 
 ### Local Development
 
-The project is already set up! If you need to reset:
+The project is already set up with SQLite! If you need to reset:
 
 ```bash
 # Fresh migration (if needed)
