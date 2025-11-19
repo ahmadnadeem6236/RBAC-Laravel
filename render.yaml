@@ -1,0 +1,82 @@
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: laravel-rbac-db
+    runtime: docker
+    plan: free
+    region: oregon
+    image:
+      url: docker.io/postgres:16-alpine
+    disk:
+      name: postgres-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
+    envVars:
+      - key: POSTGRES_USER
+        value: rbac_user
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+      - key: POSTGRES_DB
+        value: rbac_db
+
+  # Laravel Web Application
+  - type: web
+    name: laravel-rbac
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    region: oregon
+    plan: free
+    healthCheckPath: /login
+    envVars:
+      - key: APP_NAME
+        value: Laravel RBAC
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://laravel-rbac.onrender.com
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_DEPRECATIONS_CHANNEL
+        value: "null"
+      - key: LOG_LEVEL
+        value: debug
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: laravel-rbac-db
+          property: host
+      - key: DB_PORT
+        fromService:
+          type: pserv
+          name: laravel-rbac-db
+          property: port
+      - key: DB_DATABASE
+        value: rbac_db
+      - key: DB_USERNAME
+        value: rbac_user
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: laravel-rbac-db
+          envVarKey: POSTGRES_PASSWORD
+      - key: BROADCAST_DRIVER
+        value: log
+      - key: CACHE_DRIVER
+        value: file
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: SESSION_DRIVER
+        value: file
+      - key: SESSION_LIFETIME
+        value: 120
+      - key: SESSION_EXPIRE_ON_CLOSE
+        value: false
+

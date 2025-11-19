@@ -173,6 +173,32 @@ php artisan view:clear
 
 - **[README.md](README.md)** - Complete system documentation
 - **[SESSION_LOGIN.md](SESSION_LOGIN.md)** - Detailed session & authentication guide
+- **[DEPLOYMENT_RENDER.md](DEPLOYMENT_RENDER.md)** - Deploy to Render (full guide)
+- **[DEPLOY_QUICK.md](DEPLOY_QUICK.md)** - Quick deployment guide
+- **[DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md)** - Deployment files explained
+
+## 🌐 Deploy to Production
+
+Want to deploy this to Render? It's super easy!
+
+```bash
+# 1. Push to GitHub
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin YOUR_GITHUB_REPO_URL
+git push -u origin main
+
+# 2. Go to Render Dashboard
+# https://dashboard.render.com/
+
+# 3. New + → Blueprint
+# Connect your repo - Render auto-detects render.yaml!
+
+# 4. Done! Your app is live in 5 minutes! 🎉
+```
+
+See [DEPLOY_QUICK.md](DEPLOY_QUICK.md) for detailed steps.
 
 Enjoy your RBAC system! 🎉
 

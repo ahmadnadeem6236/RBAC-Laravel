@@ -1,0 +1,31 @@
+# Render Ignore File
+# Files and directories to ignore during deployment
+
+# Local development
+.env.local
+.env.development
+*.local
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing
+tests/
+phpunit.xml
+.phpunit.result.cache
+
+# Documentation (if you don't want to deploy it)
+# *.md
+
+# Development tools
+.editorconfig
+.styleci.yml
+

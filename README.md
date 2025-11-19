@@ -14,6 +14,8 @@ A complete Laravel application implementing Role-Based Access Control with condi
 
 ## Installation
 
+### Local Development
+
 The project is already set up! If you need to reset:
 
 ```bash
@@ -22,6 +24,22 @@ php artisan migrate:fresh --force
 
 # Seed database with test users
 php artisan db:seed --class=RoleUserSeeder --force
+```
+
+### Deployment to Render
+
+See [DEPLOYMENT_RENDER.md](DEPLOYMENT_RENDER.md) for complete deployment guide or [DEPLOY_QUICK.md](DEPLOY_QUICK.md) for quick start.
+
+**Quick Deploy:**
+
+```bash
+git init
+git add .
+git commit -m "Deploy to Render"
+git remote add origin YOUR_REPO_URL
+git push -u origin main
+
+# Then connect to Render - it auto-detects render.yaml!
 ```
 
 ## Usage
@@ -176,6 +194,25 @@ if (!auth()->user()->hasRole('new_role')) {
     abort(403, 'Access Denied');
 }
 ```
+
+## Deployment Files
+
+This project includes complete deployment configuration for Render:
+
+| File            | Purpose                        |
+| --------------- | ------------------------------ |
+| `render.yaml`   | Render Blueprint configuration |
+| `build.sh`      | Automated build script         |
+| `Procfile`      | Application start command      |
+| `.renderignore` | Deployment exclusions          |
+
+**Deployment Documentation:**
+
+-   [RENDER_DEPLOYMENT_READY.md](RENDER_DEPLOYMENT_READY.md) - Quick overview
+-   [DEPLOY_QUICK.md](DEPLOY_QUICK.md) - 3-step deployment
+-   [DEPLOYMENT_RENDER.md](DEPLOYMENT_RENDER.md) - Complete guide
+-   [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) - Step-by-step verification
+-   [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) - File explanations
 
 ## Development
 
