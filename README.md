@@ -4,33 +4,33 @@ A complete Laravel application implementing Role-Based Access Control with condi
 
 ## Features
 
--   **Role-Based Access Control**: Three roles (project_access, manager, admin) with different permission levels
--   **User Authentication**: Login, register, and logout functionality with persistent sessions
--   **Remember Me**: Optional "Remember Me" checkbox to stay logged in for 5 years
--   **Session Management**: Secure session handling with regeneration and proper logout
--   **Conditional Rendering**: Navigation and dashboard elements shown/hidden based on user roles
--   **Secure**: CSRF protection, password hashing, and session regeneration
--   **Form Validation**: Real-time error display with input persistence
+- **Role-Based Access Control**: Three roles (project_access, manager, admin) with different permission levels
+- **User Authentication**: Login, register, and logout functionality with persistent sessions
+- **Remember Me**: Optional "Remember Me" checkbox to stay logged in for 5 years
+- **Session Management**: Secure session handling with regeneration and proper logout
+- **Conditional Rendering**: Navigation and dashboard elements shown/hidden based on user roles
+- **Secure**: CSRF protection, password hashing, and session regeneration
+- **Form Validation**: Real-time error display with input persistence
 
 ## Database Configuration
 
 This application is configured to use different databases for different environments:
 
 ### 🗄️ Local Development → SQLite
+
 - **Default database**: SQLite (file-based, zero configuration)
 - **Location**: `database/database.sqlite`
 - **No setup required**: Works out of the box!
 - **Perfect for**: Local development and testing
 
 ### 🐘 Production → PostgreSQL
+
 - **Database**: PostgreSQL (via Render's managed database)
 - **Configuration**: Automatically set via `render.yaml`
 - **Environment variable**: `DB_CONNECTION=pgsql`
 - **Perfect for**: Production deployments with better performance and features
 
 **How it works**: The `config/database.php` defaults to SQLite when no `DB_CONNECTION` environment variable is set. In production (Render), the `render.yaml` file automatically configures PostgreSQL.
-
-📖 **For detailed database documentation, see [DATABASE.md](DATABASE.md)**
 
 ## Installation
 
@@ -47,8 +47,6 @@ php artisan db:seed --class=RoleUserSeeder --force
 ```
 
 ### Deployment to Render
-
-See [DEPLOYMENT_RENDER.md](DEPLOYMENT_RENDER.md) for complete deployment guide or [DEPLOY_QUICK.md](DEPLOY_QUICK.md) for quick start.
 
 **Quick Deploy:**
 
@@ -84,33 +82,33 @@ Then visit: `http://localhost:8000/login`
 
 ### Database
 
--   **roles**: Stores role names (project_access, manager, admin)
--   **role_user**: Pivot table for many-to-many relationship
--   **users**: Standard Laravel users table
+- **roles**: Stores role names (project_access, manager, admin)
+- **role_user**: Pivot table for many-to-many relationship
+- **users**: Standard Laravel users table
 
 ### Models
 
--   **Role.php**: Role model with belongsToMany relationship to Users
--   **User.php**: Extended with `roles()` relationship and `hasRole()` helper method
+- **Role.php**: Role model with belongsToMany relationship to Users
+- **User.php**: Extended with `roles()` relationship and `hasRole()` helper method
 
 ### Controllers
 
--   **AuthController**: Handles login, register, logout, and dashboard
--   **ProjectController**: Projects page (accessible by project_access, manager, admin)
--   **UserManagementController**: User management (accessible by manager, admin)
--   **AdminController**: Admin panel (accessible by admin only)
+- **AuthController**: Handles login, register, logout, and dashboard
+- **ProjectController**: Projects page (accessible by project_access, manager, admin)
+- **UserManagementController**: User management (accessible by manager, admin)
+- **AdminController**: Admin panel (accessible by admin only)
 
 ### Views
 
 All views use conditional rendering with `@if` directives:
 
--   **layouts/app.blade.php**: Main layout with role-based navigation
--   **auth/login.blade.php**: Login form
--   **auth/register.blade.php**: Registration form
--   **dashboard.blade.php**: User dashboard showing available features
--   **projects/index.blade.php**: Projects page
--   **users/index.blade.php**: User management page
--   **admin/index.blade.php**: Admin panel
+- **layouts/app.blade.php**: Main layout with role-based navigation
+- **auth/login.blade.php**: Login form
+- **auth/register.blade.php**: Registration form
+- **dashboard.blade.php**: User dashboard showing available features
+- **projects/index.blade.php**: Projects page
+- **users/index.blade.php**: User management page
+- **admin/index.blade.php**: Admin panel
 
 ### Routes
 
@@ -136,33 +134,33 @@ GET  /admin     - Admin panel
 
 ### project_access
 
--   ✅ Dashboard
--   ✅ Projects
+- ✅ Dashboard
+- ✅ Projects
 
 ### manager
 
--   ✅ Dashboard
--   ✅ Projects
--   ✅ User Management
+- ✅ Dashboard
+- ✅ Projects
+- ✅ User Management
 
 ### admin
 
--   ✅ Dashboard
--   ✅ Projects
--   ✅ User Management
--   ✅ Admin Panel
+- ✅ Dashboard
+- ✅ Projects
+- ✅ User Management
+- ✅ Admin Panel
 
 ## Security Features
 
--   Password hashing with bcrypt
--   CSRF token protection on all forms
--   Session regeneration on login/logout
--   Optional persistent sessions with "Remember Me" checkbox
--   Remember tokens for long-term authentication (5 years)
--   HTTP-only cookies (XSS protection)
--   Role-based authorization checks in controllers
--   Conditional UI rendering based on roles
--   Input validation with error display
+- Password hashing with bcrypt
+- CSRF token protection on all forms
+- Session regeneration on login/logout
+- Optional persistent sessions with "Remember Me" checkbox
+- Remember tokens for long-term authentication (5 years)
+- HTTP-only cookies (XSS protection)
+- Role-based authorization checks in controllers
+- Conditional UI rendering based on roles
+- Input validation with error display
 
 ## Session Configuration
 
@@ -176,10 +174,10 @@ SESSION_EXPIRE_ON_CLOSE=false
 
 ### Remember Me Feature
 
--   **Login Form**: Optional "Remember Me" checkbox (unchecked by default)
--   **Register Form**: "Remember Me" checkbox (checked by default for better UX)
--   **How it works**: When checked, creates a remember token that keeps users logged in for 5 years
--   **Session lifetime**: Without "Remember Me", sessions expire after 120 minutes or when browser closes
+- **Login Form**: Optional "Remember Me" checkbox (unchecked by default)
+- **Register Form**: "Remember Me" checkbox (checked by default for better UX)
+- **How it works**: When checked, creates a remember token that keeps users logged in for 5 years
+- **Session lifetime**: Without "Remember Me", sessions expire after 120 minutes or when browser closes
 
 For detailed information, see [SESSION_LOGIN.md](SESSION_LOGIN.md)
 
@@ -226,21 +224,13 @@ This project includes complete deployment configuration for Render:
 | `Procfile`      | Application start command      |
 | `.renderignore` | Deployment exclusions          |
 
-**Deployment Documentation:**
-
--   [RENDER_DEPLOYMENT_READY.md](RENDER_DEPLOYMENT_READY.md) - Quick overview
--   [DEPLOY_QUICK.md](DEPLOY_QUICK.md) - 3-step deployment
--   [DEPLOYMENT_RENDER.md](DEPLOYMENT_RENDER.md) - Complete guide
--   [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) - Step-by-step verification
--   [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) - File explanations
-
 ## Development
 
 This is a simple, production-ready RBAC implementation suitable for small to medium applications. For larger applications, consider using packages like:
 
--   Laravel Sanctum (for API authentication)
--   Spatie Laravel Permission (advanced permissions)
--   Laravel Jetstream (full authentication scaffolding)
+- Laravel Sanctum (for API authentication)
+- Spatie Laravel Permission (advanced permissions)
+- Laravel Jetstream (full authentication scaffolding)
 
 ## License
 

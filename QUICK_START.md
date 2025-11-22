@@ -11,12 +11,11 @@ Visit the root URL and you'll be automatically redirected to login!
 This application uses **different databases for different environments**:
 
 - **Local Development**: SQLite (already configured, no setup needed!)
-  - File: `database/database.sqlite`
-  - Zero configuration required ✅
-  
+    - File: `database/database.sqlite`
+    - Zero configuration required ✅
 - **Production (Render)**: PostgreSQL
-  - Automatically configured via `render.yaml`
-  - Managed database with better performance
+    - Automatically configured via `render.yaml`
+    - Managed database with better performance
 
 **You don't need to configure anything** - it just works! 🎉
 
@@ -29,24 +28,30 @@ Visit: `http://localhost:8000` (or `http://localhost:8000/login`)
 Try each user to see different access levels:
 
 #### User 1 - Project Access Only
+
 ```
 Email: user1@example.com
 Password: password
 ```
+
 ✅ Can access: Dashboard, Projects
 
 #### User 2 - Manager
+
 ```
 Email: user2@example.com
 Password: password
 ```
+
 ✅ Can access: Dashboard, Projects, User Management
 
 #### User 3 - Admin
+
 ```
 Email: user3@example.com
 Password: password
 ```
+
 ✅ Can access: Dashboard, Projects, User Management, Admin Panel
 
 ### Step 2: Explore Features
@@ -56,22 +61,22 @@ After logging in, notice:
 1. **Navigation Bar**: Links shown/hidden based on your role
 2. **Dashboard**: Shows what you have access to
 3. **Access Control**: Try accessing URLs directly (e.g., `/admin`) with different users
-4. **Remember Me Feature**: 
-   - Check "Remember Me" when logging in
-   - Close browser completely and reopen
-   - Visit http://localhost:8000 - you'll still be logged in!
+4. **Remember Me Feature**:
+    - Check "Remember Me" when logging in
+    - Close browser completely and reopen
+    - Visit http://localhost:8000 - you'll still be logged in!
 5. **Form Validation**: Try logging in with wrong credentials to see error messages
 
 ## 🧪 Testing Access Control
 
 Try accessing these URLs after logging in:
 
-| URL | User1 | User2 | User3 |
-|-----|-------|-------|-------|
-| /dashboard | ✅ | ✅ | ✅ |
-| /projects | ✅ | ✅ | ✅ |
-| /users | ❌ 403 | ✅ | ✅ |
-| /admin | ❌ 403 | ❌ 403 | ✅ |
+| URL        | User1  | User2  | User3 |
+| ---------- | ------ | ------ | ----- |
+| /dashboard | ✅     | ✅     | ✅    |
+| /projects  | ✅     | ✅     | ✅    |
+| /users     | ❌ 403 | ✅     | ✅    |
+| /admin     | ❌ 403 | ❌ 403 | ✅    |
 
 ## 🔄 Reset Database (if needed)
 
@@ -146,11 +151,13 @@ routes/
 ## 🐛 Troubleshooting
 
 ### Port Already in Use
+
 ```bash
 php artisan serve --port=8001
 ```
 
 ### Database Issues
+
 ```bash
 # Check database connection
 php artisan migrate:status
@@ -160,6 +167,7 @@ php artisan migrate:fresh --force --seed
 ```
 
 ### Clear Cache
+
 ```bash
 php artisan cache:clear
 php artisan config:clear
@@ -187,9 +195,6 @@ php artisan view:clear
 
 - **[README.md](README.md)** - Complete system documentation
 - **[SESSION_LOGIN.md](SESSION_LOGIN.md)** - Detailed session & authentication guide
-- **[DEPLOYMENT_RENDER.md](DEPLOYMENT_RENDER.md)** - Deploy to Render (full guide)
-- **[DEPLOY_QUICK.md](DEPLOY_QUICK.md)** - Quick deployment guide
-- **[DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md)** - Deployment files explained
 
 ## 🌐 Deploy to Production
 
@@ -212,7 +217,4 @@ git push -u origin main
 # 4. Done! Your app is live in 5 minutes! 🎉
 ```
 
-See [DEPLOY_QUICK.md](DEPLOY_QUICK.md) for detailed steps.
-
 Enjoy your RBAC system! 🎉
-
